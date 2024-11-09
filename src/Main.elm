@@ -3,6 +3,8 @@ module Main exposing (main)
 import Html
 import Browser
 import Url
+import Browser.Navigation exposing (Key)
+import Url exposing (Url)
     
 
 main =
@@ -15,16 +17,23 @@ main =
         , onUrlChange = onUrlChange
         }
 
-type Model
+type alias Model =
+    { page : Page
+    , urlKey : Navigation.Key
+    }
+    
+
+type Page
     = Home
-    | ArrayType
-    | ArrayAverage
-    | Array
+    | ArrayTypeForm
+    | ArrayMeanSizeForm ArrayType
+    | ArrayMaxCountForm { type_ : ArrayType, meanSize : Int }
+    | ArrayResult { type_ : ArrayType, meanSize : Int, maxCount : Int }
 
 
-init : () -> Url -> Key -> (Model, Cmd Msg)
+init : () -> Url -> Navigation.Key -> (Model, Cmd Msg)
 init () url key =
-         
+
 
 view : Model -> Document Msg
 
